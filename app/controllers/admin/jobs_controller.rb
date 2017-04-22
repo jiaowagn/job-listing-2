@@ -3,7 +3,7 @@ class Admin::JobsController < ApplicationController
   before_action :require_is_admin
   layout "admin"
   def index
-    @jobs = Job.all
+    @jobs = Job.recent.page
   end
 
   def new
@@ -45,7 +45,7 @@ class Admin::JobsController < ApplicationController
   def publish
     @job = Job.find(params[:id])
     @job.publish!
-    redirect_to :back 
+    redirect_to :back
   end
 
   def hide

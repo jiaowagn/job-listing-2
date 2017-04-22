@@ -2,26 +2,28 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a href="/" class="navbar-brand"> Job Listing </a>
+      <a class="navbar-brand" href="/"><img src='<%= image_url 'logo.png' %>' >Easy Offer</i></a>
     </div>
 
     <!-- Collect the nav links, forms and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if !current_user %>
-          <li><%= link_to("注册", new_user_registration_path) %></li>
-          <li><%= link_to("登录", new_user_session_path) %></li>
+          <li><a href="#" data-toggle="modal" data-target="#signup-modal">Sign up</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#login-modal">Sign in</a></li>
         <% else %>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              Hi!, <%= current_user.email %>
-              <b class="caret"></b>
+              <i class="fa fa-user-circle" class="true">
+                Hi!, <%= current_user.email %>
+                <b class="caret"></b>
+              </i>
             </a>
             <ul class="dropdown-menu">
               <% if current_user.admin? %>
               <li><%= link_to("Admin Panel", admin_jobs_path ) %></li>
               <% end %>
-              <li><%= link_to("退出", destroy_user_session_path, method: :delete) %></li>
+              <li><%= link_to("Sign out", destroy_user_session_path, method: :delete) %></li>
             </ul>
           </li>
         <% end %>
@@ -31,3 +33,40 @@
   </div>
     <!-- /.container-fluid -->
 </nav>
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog" role="document">
+    <div class="loginmodal-container">
+       <h2>Sign in to Easy Offer</h2>
+       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+         <div class="form-inputs">
+           <%= f.input :email, required: false, placeholder: "Your email address",autofocus: true %>
+           <%= f.input :password, required: false, placeholder: "Your password" %>
+           <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+         </div>
+         <div class="form-actions">
+           <%= f.button :submit, "Sign in" %>
+         </div>
+       <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h2>Sign up</h2>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true, placeholder: "Your email address" %>
+          <%= f.input :password, required: true, placeholder: "Create a password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+          <%= f.input :password_confirmation, placeholder: "Confirm password", required: true %>
+        </div>
+        <div class="form-actions">
+            <%= f.button :submit, "Sign up for Easy Offer" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
