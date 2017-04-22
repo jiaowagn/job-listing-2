@@ -1,12 +1,14 @@
-<h1> Add a job </h1>
+<h1> 新增职位 </h1>
 
-<%= simple_form_for [:admin,@job] do |f| %>
-
-<%= f.input :title %>
-<%= f.input :description %>
+<%= simple_form_for [:admin, @job] do |f| %>
+<%= f.input :company_name, :label => "公司"  %>
+<%= f.input :location, :label => "工作城市"  %>
+<%= f.input :field, :label => "行业"  %>
+<%= f.input :title, :label => "职位"  %>
+<%= f.input :description, :label => "职位描述"  %>
 <%= f.input :wage_lower_bound, :label => "薪资下限" %>
 <%= f.input :wage_upper_bound, :label => "薪资上限" %>
-<%= f.input :contact_email %>
-<%= f.input :is_hidden %>
-  <%= f.submit "Submit" %>
+<%= f.input :contact_email, :label => "联系方式"  %>
+<%= f.input :is_hidden, :label => "隐藏"  %>
+<%= f.submit "发布" %>
 <% end %>

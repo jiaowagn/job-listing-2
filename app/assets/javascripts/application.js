@@ -12,8 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require turbolinks
 //= require bootstrap/alert
 //= require bootstrap/dropdown
 //= require bootstrap/modal
+//= require 'select_city'
+//= require foundation
 //= require_tree .
+
+$(function(){ $(document).foundation(); });

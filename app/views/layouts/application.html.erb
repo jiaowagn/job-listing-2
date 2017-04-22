@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Easy Offer</title>
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="shortcut icon" href="/images/favicon2.ico">
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
@@ -15,8 +17,8 @@
         <%= render "common/navbar" %>
       </div>
       <%= render "common/flashes" %>
-      <%= yield %>
     </div>
+    <%= yield %>
     <%= render "common/footer" %>
   </body>
 </html>

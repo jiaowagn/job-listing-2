@@ -2,13 +2,13 @@ class JobsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def index
     @jobs = case params[:order]
-    when 'by_lower_bound'
-      Job.published.order('wage_lower_bound DESC')
-    when 'by_upper_bound'
-      Job.published.order('wage_upper_bound DESC')
-    else
-      Job.published.recent
-    end
+          when 'by_lower_bound'
+          Job.published.order('wage_lower_bound DESC')
+          when 'by_upper_bound'
+          Job.published.order('wage_upper_bound DESC')
+          else
+          Job.published.recent
+          end
   end
 
   def new
@@ -55,7 +55,7 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:title, :description, :wage_lower_bound, :wage_upper_bound, :contact_email, :is_hidden)
+    params.require(:job).permit(:title, :description, :wage_lower_bound, :wage_upper_bound, :contact_email, :is_hidden, :company_name, :field, :location)
   end
 
 end

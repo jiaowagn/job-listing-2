@@ -3,7 +3,7 @@ class Admin::JobsController < ApplicationController
   before_action :require_is_admin
   layout "admin"
   def index
-    @jobs = Job.recent.page
+    @jobs = Job.recent
   end
 
   def new
@@ -57,7 +57,7 @@ class Admin::JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:title, :description, :wage_lower_bound, :wage_upper_bound, :contact, :is_hidden)
+    params.require(:job).permit(:title, :description, :wage_lower_bound, :wage_upper_bound, :contact, :is_hidden, :company_name, :field, :location)
   end
 
 end
